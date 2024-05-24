@@ -1,1 +1,81 @@
-[]
+[
+    {
+        "id": "634de16a022721fd",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1",
+        "type": "tab",
+        "label": "Flujo de Medidor de Flujo",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "mqtt_broker_1",
+        "type": "mqtt-broker",
+        "name": "Broker MQTT USR-W610",
+        "broker": "192.168.1.8",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "mqtt_in_1",
+        "type": "mqtt in",
+        "z": "1",
+        "name": "Sensor de Flujo",
+        "topic": "sensor/flow",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker_1",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 240,
+        "y": 140,
+        "wires": [
+            [
+                "debug_1"
+            ]
+        ]
+    },
+    {
+        "id": "debug_1",
+        "type": "debug",
+        "z": "1",
+        "name": "Debug Sensor de Flujo",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 560,
+        "y": 140,
+        "wires": []
+    }
+]
