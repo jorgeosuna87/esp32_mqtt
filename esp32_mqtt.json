@@ -44,6 +44,64 @@
         "sessionExpiry": ""
     },
     {
+        "id": "970d6facf4219103",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "navigationStyle": "default"
+    },
+    {
+        "id": "9aa04bdeac5bc887",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "9d5b0a8d54264c39",
+        "type": "ui-page",
+        "name": "Page N",
+        "ui": "970d6facf4219103",
+        "path": "/pageN",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "9aa04bdeac5bc887",
+        "order": -1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "662f22538996a3b4",
+        "type": "ui-group",
+        "name": "My Group",
+        "page": "9d5b0a8d54264c39",
+        "width": 6,
+        "height": 1,
+        "order": -1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
         "id": "mqtt_in_1",
         "type": "mqtt in",
         "z": "1",
@@ -59,7 +117,8 @@
         "y": 140,
         "wires": [
             [
-                "debug_1"
+                "debug_1",
+                "95eb08024a935c79"
             ]
         ]
     },
@@ -76,6 +135,27 @@
         "targetType": "full",
         "x": 560,
         "y": 140,
+        "wires": []
+    },
+    {
+        "id": "95eb08024a935c79",
+        "type": "ui-text",
+        "z": "1",
+        "group": "662f22538996a3b4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "test",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 490,
+        "y": 220,
         "wires": []
     }
 ]
