@@ -91,15 +91,15 @@
     {
         "id": "662f22538996a3b4",
         "type": "ui-group",
-        "name": "My Group",
+        "name": "test_esp32",
         "page": "9d5b0a8d54264c39",
-        "width": 6,
-        "height": 1,
+        "width": "6",
+        "height": "1",
         "order": -1,
         "showTitle": true,
         "className": "",
-        "visible": true,
-        "disabled": false
+        "visible": "true",
+        "disabled": "false"
     },
     {
         "id": "mqtt_in_1",
@@ -146,7 +146,7 @@
         "width": 0,
         "height": 0,
         "name": "test",
-        "label": "text",
+        "label": "test",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "style": false,
