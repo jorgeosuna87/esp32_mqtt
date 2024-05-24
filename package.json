@@ -1,0 +1,12 @@
+{
+    "name": "esp32_mqtt",
+    "description": "comunicacion esp32",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "esp32_mqtt.json",
+            "credentialsFile": "esp32_mqtt_cred.json"
+        }
+    }
+}
