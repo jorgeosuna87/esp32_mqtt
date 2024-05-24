@@ -196,7 +196,7 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 580,
+        "x": 420,
         "y": 100,
         "wires": []
     }
