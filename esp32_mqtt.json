@@ -15,6 +15,13 @@
         "info": ""
     },
     {
+        "id": "c49e2bd47886830e",
+        "type": "tab",
+        "label": "Flujo de Datos Simulados",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "mqtt_broker_1",
         "type": "mqtt-broker",
         "name": "Broker MQTT USR-W610",
@@ -156,6 +163,41 @@
         "className": "",
         "x": 490,
         "y": 220,
+        "wires": []
+    },
+    {
+        "id": "06ae4e02aca1c321",
+        "type": "mqtt in",
+        "z": "c49e2bd47886830e",
+        "name": "Sensor de Flujo",
+        "topic": "sensor/simulated",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker_1",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "f596369ede8e268d"
+            ]
+        ]
+    },
+    {
+        "id": "f596369ede8e268d",
+        "type": "debug",
+        "z": "c49e2bd47886830e",
+        "name": "Debug Sensor de Flujo",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 560,
+        "y": 160,
         "wires": []
     }
 ]
