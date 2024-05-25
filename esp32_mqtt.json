@@ -22,6 +22,13 @@
         "info": ""
     },
     {
+        "id": "0abce1a265bb0231",
+        "type": "tab",
+        "label": "Tablero_influxdb",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "mqtt_broker_1",
         "type": "mqtt-broker",
         "name": "Broker MQTT USR-W610",
@@ -109,6 +116,21 @@
         "disabled": "false"
     },
     {
+        "id": "0565dd10cb5199d6",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": "8086",
+        "protocol": "http",
+        "database": "prueba_1",
+        "name": "InfluxDB Local",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "",
+        "rejectUnauthorized": false
+    },
+    {
         "id": "mqtt_in_1",
         "type": "mqtt in",
         "z": "1",
@@ -161,8 +183,8 @@
         "fontSize": 16,
         "color": "#717171",
         "className": "",
-        "x": 490,
-        "y": 220,
+        "x": 610,
+        "y": 180,
         "wires": []
     },
     {
@@ -196,8 +218,282 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 420,
+        "x": 480,
         "y": 100,
         "wires": []
+    },
+    {
+        "id": "d80ef249f2123560",
+        "type": "inject",
+        "z": "0abce1a265bb0231",
+        "name": "Simulate ADC Input",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "payload.timestamp",
+                "v": "",
+                "vt": "date"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "4005",
+        "payloadType": "num",
+        "x": 250,
+        "y": 280,
+        "wires": [
+            [
+                "318fad8f06f77ff1"
+            ]
+        ]
+    },
+    {
+        "id": "318fad8f06f77ff1",
+        "type": "function",
+        "z": "0abce1a265bb0231",
+        "name": "calc_vol",
+        "func": "const valorCrudo = msg.payload;\nconst valorLitros = ((valorCrudo - 4000) / (20000 - 4000)) * (40000 - 0);\nmsg.payload = Math.round(valorLitros);  // Valor en litros\nreturn msg;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 280,
+        "wires": [
+            [
+                "a836554305fba8a0",
+                "a30d3c20815a95f5"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d49fc8b2da531ddf",
+        "type": "influxdb out",
+        "z": "0abce1a265bb0231",
+        "influxdb": "0565dd10cb5199d6",
+        "name": "InfluxDB Output",
+        "measurement": "test",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "",
+        "precisionV18FluxV20": "us",
+        "retentionPolicyV18Flux": "",
+        "org": "aspro",
+        "bucket": "prueba_1",
+        "x": 840,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a836554305fba8a0",
+        "type": "debug",
+        "z": "0abce1a265bb0231",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0bcbb81796a6a3c1",
+        "type": "inject",
+        "z": "0abce1a265bb0231",
+        "name": "Simulate ADC Input",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "200",
+        "payloadType": "num",
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "be53b18831fae09f"
+            ]
+        ]
+    },
+    {
+        "id": "32cd0e870067f260",
+        "type": "debug",
+        "z": "0abce1a265bb0231",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a30d3c20815a95f5",
+        "type": "influxdb out",
+        "z": "0abce1a265bb0231",
+        "influxdb": "0565dd10cb5199d6",
+        "name": "InfluxDB Output",
+        "measurement": "tank_volume",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "aspro",
+        "bucket": "prueba_1",
+        "x": 780,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "be53b18831fae09f",
+        "type": "change",
+        "z": "0abce1a265bb0231",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fields.volumen",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"volumen\": payload }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 380,
+        "wires": [
+            [
+                "d49fc8b2da531ddf",
+                "32cd0e870067f260"
+            ]
+        ]
+    },
+    {
+        "id": "ac70ab4c14d788f8",
+        "type": "influxdb out",
+        "z": "0abce1a265bb0231",
+        "influxdb": "0565dd10cb5199d6",
+        "name": "InfluxDB Output",
+        "measurement": "volumen",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "",
+        "precisionV18FluxV20": "us",
+        "retentionPolicyV18Flux": "",
+        "org": "aspro",
+        "bucket": "prueba_1",
+        "x": 780,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3e98176b86982460",
+        "type": "inject",
+        "z": "0abce1a265bb0231",
+        "name": "Simulate ADC Input",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "500",
+        "payloadType": "num",
+        "x": 290,
+        "y": 100,
+        "wires": [
+            [
+                "234bd86221f089c9"
+            ]
+        ]
+    },
+    {
+        "id": "e44d61c6ebd84889",
+        "type": "debug",
+        "z": "0abce1a265bb0231",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "234bd86221f089c9",
+        "type": "change",
+        "z": "0abce1a265bb0231",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fields.volumen",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"volumen\": payload }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 100,
+        "wires": [
+            [
+                "ac70ab4c14d788f8",
+                "e44d61c6ebd84889"
+            ]
+        ]
     }
 ]
